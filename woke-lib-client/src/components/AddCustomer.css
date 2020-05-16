@@ -1,0 +1,31 @@
+.library_user-form{
+    margin: 4px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .article-form, .submit-form, .edit-form{
+      margin: 2px;
+      padding-bottom: 10px;
+      width: 500px;
+      border: 2px solid skyblue;
+  }
+  
+  .labelling{
+      margin-top: 4px;
+      margin-bottom: 0px;
+    width: 80px;
+    vertical-align: middle;
+  }
+  
+  .input-field{
+    width: 240px;
+    padding: 3px;
+  }
+
+  .btn{
+    margin: 2px;
+  }

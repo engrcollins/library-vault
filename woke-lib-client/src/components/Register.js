@@ -42,7 +42,8 @@ const Registration= () => {
   const [library_user, setLibrary_user] = useState(initialLibrary_userState);
   const [submitted, setSubmitted] = useState(false);
   const [hidden, setHidden] = useState(true);
-  const [errors, setErrors] = useState({})
+  const [errors, setErrors] = useState({});
+  const [submit_error, setSubmit_error] = useState("");
 
 
   const handleInputChange = event => {
@@ -99,23 +100,34 @@ const Registration= () => {
 
     Library_userDataService.create(data)
       .then(response => {
-        setLibrary_user({
-          firstName: response.data.firstName,
-          lastName: response.data.lastName,
-          gender: response.data.gender,
-          birthDate: response.data.birthDate,
-          username: response.data.username,
-          phone: response.data.phone,
-          email: response.data.email,
-          password: response.data.password,
-          createdAt: response.data.createdAt
-        });
-        setSubmitted(true);
-        console.log(response.data);
-      })
+        console.log(library_user.username)
+        console.log(response.data)
+        if ((library_user.username === response.data) && (typeof response.data === 'string')){
+          window.alert(`Your username ${library_user.username} exists already, please try another username`);
+          setLibrary_user(initialLibrary_userState);
+        }else if ((library_user.email === response.data) && (typeof response.data === 'string')){
+          window.alert(`Your email ${library_user.email} exists already, please try another email`);
+          setLibrary_user(initialLibrary_userState);
+        }else{
+          setLibrary_user({
+            firstName: response.data.firstName,
+            lastName: response.data.lastName,
+            gender: response.data.gender,
+            birthDate: response.data.birthDate,
+            username: response.data.username,
+            phone: response.data.phone,
+            email: response.data.email,
+            password: response.data.password,
+            createdAt: response.data.createdAt
+          });
+          setSubmitted(true);
+          //console.log(response.data);
+        }
+    })
       .catch(e => {
         console.log(e);
       });
+      
     }
   };
 
@@ -291,6 +303,7 @@ const Registration= () => {
                 </TableBody>
                 </Table>
 
+                <p>{submit_error}</p>
                 <button onClick={saveLibrary_user} className="btn btn-success">
                 Submit
                 </button>

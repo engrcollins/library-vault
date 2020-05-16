@@ -14,41 +14,57 @@ const Library_user = function(library_user) {
 };
 
 Library_user.create = (newLibrary_user, result) => {
-// generate a hash from string
-var crypto = require('crypto'),
-    text = newLibrary_user.password,
-    key = 'ife key'
+  // generate a hash from string
+  var crypto = require('crypto'),
+      text = newLibrary_user.password,
+      key = 'ife key'
 
-// create hahs
-var hash = crypto.createHmac('sha512', key)
-hash.update(text)
-var pass = hash.digest('hex')
+  // create hahs
+  var hash = crypto.createHmac('sha512', key)
+  hash.update(text)
+  var pass = hash.digest('hex')
 
-// print result
-console.log(pass);
-newLibrary_user.password = pass;
+  // print result
+  console.log(pass);
+  newLibrary_user.password = pass;
 
-sql.query("SELECT * FROM library_users WHERE username = ?",  [newLibrary_user.username], (err,res) =>{
+  sql.query("SELECT * FROM library_users WHERE username = ?",  [newLibrary_user.username], (err,res) =>{
     if(err) {
       console.log("error: ", err);
       result(err, null);
       return;
     }
     if (res.length) {
-      console.log(`library_user: ${res[0].username} exist`);
-      result(null, res[0], res.length);
+      console.log(`library_user: ${res[0].username} exists already`);
+      console.log(typeof res[0]);
+      result(null, res[0].username);
       return;
     }else{
-      sql.query("INSERT INTO library_users SET ?", newLibrary_user, (err, res) => {
-        if (err) {
+      sql.query("SELECT * FROM library_users WHERE email = ?",  [newLibrary_user.email], (err,res) =>{
+        if(err) {
           console.log("error: ", err);
           result(err, null);
           return;
         }
-        console.log("data inserted");
-      });
+        if (res.length) {
+          console.log(`library_user: ${res[0].email} exists already`);
+          console.log(typeof res[0]);
+          result(null, res[0].email);
+          return;
+        }else{
+          sql.query("INSERT INTO library_users SET ?", newLibrary_user, (err, res) => {
+            if (err) {
+              console.log("error: ", err);
+              result(err, null);
+              return;
+            }
+            console.log("created library_user: ", { user_id: res.insertId, ...newLibrary_user });
+            result(null, { user_id: res.insertId, ...newLibrary_user });
+          });
+        }
+      })
     }
-});
+  });
 }
 
 Library_user.findById = (library_userId, result) => {

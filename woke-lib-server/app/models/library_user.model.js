@@ -34,22 +34,20 @@ sql.query("SELECT * FROM library_users WHERE username = ?",  [newLibrary_user.us
       result(err, null);
       return;
     }
-
-    if (!res.length){
+    if (res.length) {
+      console.log(`library_user: ${res[0].username} exist`);
+      result(null, res[0], res.length);
+      return;
+    }else{
       sql.query("INSERT INTO library_users SET ?", newLibrary_user, (err, res) => {
         if (err) {
           console.log("error: ", err);
           result(err, null);
           return;
         }
-
-        console.log("created library_user: ", { user_id: res.insertId, ...newLibrary_user });
-        result(null, { user_id: res.insertId, ...newLibrary_user });
+        console.log("data inserted");
       });
-    }else{
-      console.log("This username exists: ", newLibrary_user.username )
-      result(null, newLibrary_user.username);
-  };
+    }
 });
 }
 

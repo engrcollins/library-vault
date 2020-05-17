@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import './AddCustomer.css'
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Grid,Typography, Divider } from "@material-ui/core";
 import Library_userDataService from "../services/Library_userService";
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -11,6 +13,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
+import CheckCircleTwoToneIcon from '@material-ui/icons/CheckCircleTwoTone';
 
 const useStyles = makeStyles({
     root: {
@@ -23,6 +26,14 @@ const useStyles = makeStyles({
     active: {
       backgroundColor: 'rgba(255, 255, 255, 0.12)',
     },
+    warnings: {
+      color: 'red',
+      padding: 0,
+    },
+    success: {
+      color: '#004d00',
+    },
+    
   });
 
 const Registration= () => {
@@ -143,10 +154,15 @@ const Registration= () => {
       <div className="submit-form">
         {submitted ? (
           <div>
-            <h4>Topic created successfully!</h4>
-            <button className="btn btn-success" onClick={newLibrary_user}>
-              Create Another
-            </button>
+            <br />
+            <Typography variant="body1" display="block" className={classes.success} gutterBottom>
+            <CheckCircleTwoToneIcon style={{fontSize:'26px', padding:'-2px'}}/>
+            Registration successful! Your Woke Library username is <b>{library_user.username}.</b>
+            </Typography>
+            <br />
+            <Link to={"/library-login"}>
+              Login to Woke Library
+            </Link>
           </div>
         ) : (
           <div article-form="true">
@@ -171,7 +187,9 @@ const Registration= () => {
                         onChange={handleInputChange}
                         name="firstName"
                     />
-                        {errors.firstName && <p>{errors.firstName}</p>}
+                        <Typography variant="caption" display="block" className={classes.warnings} gutterBottom>
+                          {errors.firstName && <p>{errors.firstName}</p>}
+                          </Typography>
                     </TableCell>
                     </TableRow>
 
@@ -187,7 +205,9 @@ const Registration= () => {
                         onChange={handleInputChange}
                         name="lastName"
                     />
+                      <Typography variant="caption" display="block" className={classes.warnings} gutterBottom>
                         {errors.lastName && <p>{errors.lastName}</p>}
+                          </Typography>
                     </TableCell>
                     </TableRow>
 
@@ -199,7 +219,9 @@ const Registration= () => {
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>           
                       </select>
-                      {errors.gender && <p>{errors.gender}</p>}
+                      <Typography variant="caption" display="block" className={classes.warnings} gutterBottom>
+                        {errors.gender && <p>{errors.gender}</p>}
+                          </Typography>
                     </TableCell>
                     </TableRow>
 
@@ -217,7 +239,9 @@ const Registration= () => {
                         shrink: true,
                         }}
                     />
+                      <Typography variant="caption" display="block" className={classes.warnings} gutterBottom>
                         {errors.birthDate && <p>{errors.birthDate}</p>}
+                          </Typography>
                     </TableCell>
                     </TableRow>
 
@@ -233,7 +257,9 @@ const Registration= () => {
                         onChange={handleInputChange}
                         name="username"
                     />
+                      <Typography variant="caption" display="block" className={classes.warnings} gutterBottom>
                         {errors.username && <p>{errors.username}</p>}
+                          </Typography>
                     </TableCell>
                     </TableRow>
                     
@@ -249,7 +275,9 @@ const Registration= () => {
                         onChange={handleInputChange}
                         name="phone"
                     />
-                        {errors.phone && <p>{errors.phone}</p>}
+                      <Typography variant="caption" display="block" className={classes.warnings} gutterBottom>
+                          {errors.phone && <p>{errors.phone}</p>}
+                          </Typography>
                     </TableCell>
                     </TableRow>
 
@@ -265,7 +293,9 @@ const Registration= () => {
                         onChange={handleInputChange}
                         name="email"
                     />
+                      <Typography variant="caption" display="block" className={classes.warnings} gutterBottom>
                         {errors.email && <p>{errors.email}</p>}
+                          </Typography>
                     </TableCell>
                     </TableRow>
 
@@ -281,7 +311,9 @@ const Registration= () => {
                         onChange={handleInputChange}
                         name="password"
                     />
+                      <Typography variant="caption" display="block" className={classes.warnings} gutterBottom>
                         {errors.password && <p>{errors.password}</p>}
+                          </Typography>
                     </TableCell>
                     </TableRow>
 
@@ -296,8 +328,12 @@ const Registration= () => {
                         value={library_user.confirmPassword|| ""}
                         onChange={handleInputChange}
                         name="confirmPassword"
-                    />&ensp;<button onClick={toggleShow}>{hidden ? (<VisibilityOffIcon style={{fontSize:'20px', width: '11px', height: '11px', padding:'-2px'}}/>) : (<VisibilityIcon style={{fontSize:'20px', width: '11px', height: '11px', padding:'-2px'}} />)}</button>
-                        {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+                    />
+                      &ensp;<button onClick={toggleShow}>{hidden ? (<VisibilityOffIcon style={{fontSize:'20px', width: '11px', height: '11px', padding:'-2px'}}/>) : (<VisibilityIcon style={{fontSize:'20px', width: '11px', height: '11px', padding:'-2px'}} />)}
+                      </button>
+                    <Typography variant="caption" display="block" className={classes.warnings} gutterBottom>
+                          {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+                          </Typography>
                     </TableCell>
                     </TableRow>
                 </TableBody>

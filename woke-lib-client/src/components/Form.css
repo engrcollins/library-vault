@@ -1,5 +1,6 @@
-.library_user-form{
+.library-form{
     margin: 4px;
+    margin-left: -200px;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;

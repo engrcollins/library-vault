@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import './AddCustomer.css'
+import './Form.css'
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Grid,Typography, Divider } from "@material-ui/core";
 import Library_userDataService from "../services/Library_userService";
@@ -150,7 +150,7 @@ const Registration= () => {
 
   const classes = useStyles();
   return (
-    <div className="library_user-form">
+    <div className="library-form">
       <div className="submit-form">
         {submitted ? (
           <div>
@@ -160,7 +160,7 @@ const Registration= () => {
             Registration successful! Your Woke Library username is <b>{library_user.username}.</b>
             </Typography>
             <br />
-            <Link to={"/library-login"}>
+            <Link to={"/login"}>
               Login to Woke Library
             </Link>
           </div>

@@ -107,7 +107,7 @@ const Header = () => {
           </span>
           </Toolbar>
         </AppBar>
-        <div onClick={setDate} className="mid-header" align="center" id="welcome"> <p className="welc-login">Welcome Reader | <Link to={"/join-library"}>Join Woke Library</Link> | Login</p> <p className="date"></p>
+        <div onClick={setDate} className="mid-header" align="center" id="welcome"> <p className="welc-login">Welcome Reader | <Link to={"/join-library"}>Join Woke Library</Link> | <Link to={"/login"}>Login</Link></p> <p className="date"></p>
         </div>
       </div>
       );

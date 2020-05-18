@@ -14,3 +14,4 @@ User.find({ 'username': username,'email':email }, function(err, user) {
     err.status = 310;
     return done(err);
     }
+})

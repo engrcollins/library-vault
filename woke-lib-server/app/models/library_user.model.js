@@ -25,7 +25,7 @@ Library_user.create = (newLibrary_user, result) => {
   var pass = hash.digest('hex')
 
   // print result
-  console.log(pass);
+  //console.log(pass);
   newLibrary_user.password = pass;
 
   sql.query("SELECT * FROM library_users WHERE username = ?",  [newLibrary_user.username], (err,res) =>{

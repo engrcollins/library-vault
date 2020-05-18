@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import './Form.css'
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Grid,Typography, Divider } from "@material-ui/core";
-import Library_userDataService from "../services/Library_userService";
+import LoginDataService from "../services/LoginService";
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Table from '@material-ui/core/Table';
@@ -80,7 +80,7 @@ const Login= () => {
     const errors = validateForm(data)
     setErrors(errors)
     if (!Object.keys(errors).length) {
-        Library_userDataService.create(data)
+        LoginDataService.create(data)
         .then(response => {
             setUser_login({
                 username: response.data.username,
@@ -97,12 +97,6 @@ const Login= () => {
     }
   };
 
-  const newUser_login = () => {
-    setUser_login(initialUser_loginState);
-    setLoggedin(false);
-    setHidden(true);
-  };
-
   const classes = useStyles();
   return (
     <div className="library-form">
@@ -112,12 +106,8 @@ const Login= () => {
             <br />
             <Typography variant="body1" display="block" className={classes.success} gutterBottom>
             <CheckCircleTwoToneIcon style={{fontSize:'26px', padding:'-2px'}}/>
-            Login successful! Your Woke Library username is <b>{user_login.username}.</b>
+            <b>{user_login.username} Login successful!</b>
             </Typography>
-            <br />
-            <Link to={"/library-login"}>
-              Login to Woke Library
-            </Link>
           </div>
         ) : (
           <div article-form="true">

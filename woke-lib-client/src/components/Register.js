@@ -114,9 +114,13 @@ const Registration= () => {
         console.log(library_user.username)
         console.log(response.data)
         if ((library_user.username === response.data) && (typeof response.data === 'string')){
+          console.log(library_user.username)
+          console.log(response.data)
           window.alert(`Your username ${library_user.username} exists already, please try another username`);
           setLibrary_user(initialLibrary_userState);
         }else if ((library_user.email === response.data) && (typeof response.data === 'string')){
+          console.log(library_user.email)
+          console.log(response.data)
           window.alert(`Your email ${library_user.email} exists already, please try another email`);
           setLibrary_user(initialLibrary_userState);
         }else{
@@ -140,12 +144,6 @@ const Registration= () => {
       });
       
     }
-  };
-
-  const newLibrary_user = () => {
-    setLibrary_user(initialLibrary_userState);
-    setSubmitted(false);
-    setHidden(true);
   };
 
   const classes = useStyles();
@@ -217,7 +215,8 @@ const Registration= () => {
                         onChange={handleInputChange} name="gender">
                         <option value="" disabled selected hidden>Please choose your gender...</option>
                         <option value="Male">Male</option>
-                        <option value="Female">Female</option>           
+                        <option value="Female">Female</option>
+                        <option value="Undisclosed">Prefer not to Disclose</option>           
                       </select>
                       <Typography variant="caption" display="block" className={classes.warnings} gutterBottom>
                         {errors.gender && <p>{errors.gender}</p>}

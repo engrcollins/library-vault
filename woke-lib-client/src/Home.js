@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from "react-router-dom";
 import './Home.css'
-import Library_topicDataService from "./services/Library_userService";
+import Library_topicDataService from "./services/Library_topicService";
 import { Grid,Typography, Divider } from "@material-ui/core";
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -121,7 +121,7 @@ const Home = () =>{
                         September 14, 2020. | Author: {library_topic.author}.
                     </Typography>
                     <Typography variant="body2" component="p" className={classes.para}>
-                    {library_topic.description}
+                    {library_topic.content}
                       <br />
                     </Typography>
                   </CardContent>

@@ -4,11 +4,6 @@ const session = require('express-session');
 const cors = require("cors");
 
 const app = express();
-app.use(session({
-	secret: 'peng',
-	resave: true,
-	saveUninitialized: true
-}));
 
 /*var corsOptions = {
   origin: "http://localhost:8081"
@@ -30,6 +25,11 @@ var corsOptions = {
 
 app.use(cors(corsOptions));
 
+app.use(session({
+	secret: 'peng',
+	resave: true,
+	saveUninitialized: true
+}));
 // parse requests of content-type: application/json
 app.use(bodyParser.json());
 
@@ -43,6 +43,7 @@ app.get("/", (req, res) => {
 
 require("./app/routes/login.routes.js")(app);
 require("./app/routes/user.routes.js")(app);
+require("./app/routes/topic.routes.js")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 3100;

@@ -27,9 +27,9 @@ const AddThread= () => {
     id: null,
     title: "",
     category: '',
-    description: "",
+    content: "",
     tags: "",
-    published: false
+    author: ""
   };
   const [library_topic, setLibrary_topic] = useState(initialLibrary_topicState);
   const [submitted, setSubmitted] = useState(false);
@@ -42,7 +42,7 @@ const AddThread= () => {
   const saveLibrary_topic = () => {
     var data = {
       title: library_topic.title,
-      description: library_topic.description,
+      content: library_topic.content,
       category: library_topic.category,
       tags: library_topic.tags
     };
@@ -52,10 +52,10 @@ const AddThread= () => {
         setLibrary_topic({
           id: response.data.id,
           title: response.data.title,
-          description: response.data.description,
+          content: response.data.content,
           category: response.category,
           tags: response.tags,
-          published: response.data.published
+          author: response.data.author
         });
         setSubmitted(true);
         console.log(response.data);
@@ -135,7 +135,7 @@ const AddThread= () => {
                         required
                         value={library_topic.content|| ""}
                         onChange={handleInputChange}
-                        name="description"
+                        name="content"
                     />
                     </TableCell>
                     </TableRow>

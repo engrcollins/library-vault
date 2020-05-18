@@ -1,22 +1,22 @@
 module.exports = app => {
-    const topics = require("../controllers/topic.controller.js");
+    const library_topic = require("../controllers/topic.controller.js");
   
     // Create a new Topic
-    app.post("/topics", topics.create);
+    app.post("/library_topics", library_topic.create);
   
     // Retrieve all Topics
-    app.get("/topics", topics.findAll);
+    app.get("/library_topics", library_topic.findAll);
   
     // Retrieve a single Topic with topicId
-    app.get("/topics/:topicId", topics.findOne);
+    app.get("/library_topics/:topicId", library_topic.findOne);
   
     // Update a Topic with topicId
-    app.put("/topics/:topicId", topics.update);
+    app.put("/library_topics/:topicId", library_topic.update);
   
     // Delete a Topic with topicId
-    app.delete("/topics/:topicId", topics.delete);
+    app.delete("/library_topics/:topicId", library_topic.delete);
   
     // Create a new Topic
-    app.delete("/topics", topics.deleteAll);
+    app.delete("/library_topics", library_topic.deleteAll);
   };
   

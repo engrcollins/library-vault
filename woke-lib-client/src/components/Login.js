@@ -106,7 +106,9 @@ const Login= () => {
             <br />
             <Typography variant="body1" display="block" className={classes.success} gutterBottom>
             <CheckCircleTwoToneIcon style={{fontSize:'26px', padding:'-2px'}}/>
-            <b>{user_login.username} Login successful!</b>
+            <b>{user_login.username} Login successful!,  continue to </b><Link to={"/"}>
+             Library.
+            </Link>
             </Typography>
           </div>
         ) : (

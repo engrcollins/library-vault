@@ -9,7 +9,7 @@ exports.create = (req, res) => {
     // Create a Login_user
   const login_user = new Login_user({
     username: req.body.username,
-    password: req.body.password
+    password: req.body.password,
   });
 
   // Find this Login_user in the database
@@ -17,14 +17,14 @@ exports.create = (req, res) => {
     if (err){
       res.status(500).send({
         message:
-          err.message || "Some error occurred while creating the Login_user."
+          err.message || "Invalid credentials"
       });
-     } else {
+    }else{
+      req.session.user = data.username;
       req.session.loggedin = true;
-      req.session.username = login_user.username;
-      console.log(req.session.loggedin, req.session.username)
-      res.send(data)
-
-  }
-});
+      console.log(req.session.loggedin)
+      console.log(req.session.user)
+      return res.send(data.username);
+    }
+  });
 }

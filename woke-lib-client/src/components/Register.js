@@ -93,52 +93,51 @@ const Registration= () => {
         }
 
   const saveLibrary_user = () => {
-        var data = {
-        firstName: library_user.firstName,
-        lastName: library_user.lastName,
-        gender: library_user.gender,
-        birthDate: library_user.birthDate,
-        username: library_user.username,
-        phone: library_user.phone,
-        email: library_user.email,
-        password: library_user.password,
-        confirmPassword: library_user.confirmPassword,
-        createdAt: new Date().toISOString().slice(0, 19).replace('T', ' ')
-        };
-        const errors = validateForm(data)
-        setErrors(errors)
-        if (!Object.keys(errors).length) {
-
-    Library_userDataService.create(data)
+    var data = {
+      firstName: library_user.firstName,
+      lastName: library_user.lastName,
+      gender: library_user.gender,
+      birthDate: library_user.birthDate,
+      username: library_user.username,
+      phone: library_user.phone,
+      email: library_user.email,
+      password: library_user.password,
+      confirmPassword: library_user.confirmPassword,
+      createdAt: new Date().toISOString().slice(0, 19).replace('T', ' ')
+    };
+    const errors = validateForm(data)
+    setErrors(errors)
+    if (!Object.keys(errors).length) {
+      Library_userDataService.create(data)
       .then(response => {
         console.log(library_user.username)
         console.log(response.data)
         if ((library_user.username === response.data) && (typeof response.data === 'string')){
-          console.log(library_user.username)
-          console.log(response.data)
-          window.alert(`Your username ${library_user.username} exists already, please try another username`);
-          setLibrary_user(initialLibrary_userState);
+            console.log(library_user.username)
+            console.log(response.data)
+            window.alert(`Your username ${library_user.username} exists already, please try another username`);
+            setLibrary_user(initialLibrary_userState);
         }else if ((library_user.email === response.data) && (typeof response.data === 'string')){
-          console.log(library_user.email)
-          console.log(response.data)
-          window.alert(`Your email ${library_user.email} exists already, please try another email`);
-          setLibrary_user(initialLibrary_userState);
+            console.log(library_user.email)
+            console.log(response.data)
+            window.alert(`Your email ${library_user.email} exists already, please try another email`);
+            setLibrary_user(initialLibrary_userState);
         }else{
-          setLibrary_user({
-            firstName: response.data.firstName,
-            lastName: response.data.lastName,
-            gender: response.data.gender,
-            birthDate: response.data.birthDate,
-            username: response.data.username,
-            phone: response.data.phone,
-            email: response.data.email,
-            password: response.data.password,
-            createdAt: response.data.createdAt
-          });
-          setSubmitted(true);
-          //console.log(response.data);
+            setLibrary_user({
+              firstName: response.data.firstName,
+              lastName: response.data.lastName,
+              gender: response.data.gender,
+              birthDate: response.data.birthDate,
+              username: response.data.username,
+              phone: response.data.phone,
+              email: response.data.email,
+              password: response.data.password,
+              createdAt: response.data.createdAt
+            });
+            setSubmitted(true);
+            //console.log(response.data);
         }
-    })
+      })
       .catch(e => {
         console.log(e);
       });

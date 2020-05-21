@@ -34,7 +34,7 @@ const useStyles = makeStyles({
       color: '#004d00',
     },
     
-  });
+});
 
 const Login= () => {
   const initialUser_loginState = {
@@ -82,18 +82,17 @@ const Login= () => {
     if (!Object.keys(errors).length) {
         LoginDataService.create(data)
         .then(response => {
-            setUser_login({
-                username: response.data.username,
-                password: response.data.password
-
-            });
-            setLoggedin(true);
-                //console.log(response.data);
-            })
-            .catch(e => {
-                console.log(e);
-            });
-      
+          setUser_login({
+            username: response.data
+        });
+        setLoggedin(true);
+        console.log(`${user_login.username} logged in!`)
+    })
+      .catch(e => {
+        console.log(e);
+        window.alert("Invalid credentials, please enter your correct username and password");
+        setUser_login(initialUser_loginState);
+      });
     }
   };
 
@@ -106,7 +105,7 @@ const Login= () => {
             <br />
             <Typography variant="body1" display="block" className={classes.success} gutterBottom>
             <CheckCircleTwoToneIcon style={{fontSize:'26px', padding:'-2px'}}/>
-            <b>{user_login.username} Login successful!,  continue to </b><Link to={"/"}>
+            <b>Login successful!,  continue to </b><Link to={"/"}>
              Library.
             </Link>
             </Typography>

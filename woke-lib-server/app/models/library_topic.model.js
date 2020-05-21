@@ -48,7 +48,7 @@ Library_topic.getAll = result => {
       return;
     }
 
-    console.log("library_topics: ", res);
+    //console.log("library_topics: ", res);
     result(null, res);
   });
 };

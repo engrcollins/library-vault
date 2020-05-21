@@ -19,15 +19,15 @@ Login_user.create = (newLogin_user, result) => {
 
     // print result
     newLogin_user.password = pass;
-    sql.query('SELECT * FROM library_users WHERE username = ? AND password = ?', [newLogin_user.username, newLogin_user.password], (err,res) =>{
+    sql.query('SELECT * FROM library_users WHERE username = ? AND password = ?', [newLogin_user.username, newLogin_user.password], (err, res) =>{
         if(err) {
             console.log("error: ", err);
             result(err, null);
             return;
         }
         if (res.length) {
-            console.log(`login_user: Congrats ${res[0].username} exists`);
-            result(null, res[0].username);
+            console.log(`Congrats ${res[0].username}, your session has just started`);
+            result(null, res[0] );
             return;
         }
         // not found Customer with the id

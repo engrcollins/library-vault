@@ -27,11 +27,12 @@ exports.create = (req, res) => {
       let id = data.user_id;
       sessionData.user.username = username;
       sessionData.user.id =  id;*/
+      req.session.user = data.username;
       console.log(data)
-      console.log(req.sessionID);
+      console.log(req.session.user);
       if(req.session.page_views){
         req.session.page_views++;
-        console.log("You visited McCollins Technologies " + req.session.page_views + " times, " + req.session.loggedin);
+        console.log("You visited McCollins Technologies " + req.session.page_views + " times, " + req.sessionID);
      } else {
         req.session.page_views = 1;
         console.log({ message: "Welcome to McCollins Technologies." });

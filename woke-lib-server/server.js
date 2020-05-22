@@ -1,12 +1,13 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 var FileStore = require('session-file-store')(session);;
 
-const cors = require("cors");
-
 const app = express();
+
+
 
 /*var corsOptions = {
   origin: "http://localhost:8081"
@@ -15,7 +16,7 @@ const app = express();
 app.use(cors(corsOptions));
 */
 
-var whitelist = ['http://localhost:3000', 'http://desktop-hdv5l9a:3000', 'https://engrcollins.github.io', 'https://dev-catalog.netlify.app'];
+var whitelist = ['http://localhost:3000', 'desktop-hdv5l9a:3000', '192.162.43.166:3000', 'https://engrcollins.github.io'];
 var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1 || !origin) {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from "react-router-dom";
+import Cookies from "js-cookie";
 import './Home.css'
 import Library_topicDataService from "./services/Library_topicService";
 import { Grid,Typography, Divider } from "@material-ui/core";
@@ -69,8 +70,7 @@ const Home = () =>{
       .then(response => {
         setIsLoading(false);
         setLibrary_topics(response.data);
-        console.log(response.data);
-        console.log(document.cookie);
+        console.log(Cookies.get('name'))
       })
       .catch(e => {
         console.log(e);

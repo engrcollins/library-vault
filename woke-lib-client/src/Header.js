@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import HeaderDataService from "./services/HeaderService";
+import Cookies from "js-cookie";
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -8,6 +8,16 @@ import TypoGraphy from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import header2 from './materials/header2.png'
 const Header = () => {
+  const [loggedIn, setLoggedIn] = useState(false);
+  console.log(Cookies.get('name'))
+  const currentUser =  Cookies.get('name');
+  const getUser = () => {
+    if (typeof currentUser === 'string'){
+      setLoggedIn(true)
+    }else {
+      console.log('no user')
+    };
+  }
     const  setDate = () => {
       const now = new Date();
       const mm = now.getMonth();
@@ -93,23 +103,16 @@ const Header = () => {
         },
     }));
 
-    const [LoggedIn, setLoggedIn] = useState(true);
-    const [Username, setUsername] = useState("Mccollins");
     const setUserStatus = () => {
-      HeaderDataService.get()
-      .then(response => {
-        console.log(response.data);
-      })
-      .catch(e => {
-        console.log(e);
-      });
-      setLoggedIn(false)
+      Cookies.remove('name');
+      console.log("Cookies removed");
+      window.location.reload(false);
     };
   
 
     const classes = useStyles();
     return(
-      <div style={{margin:"0px"}}>
+      <div onLoad={getUser} style={{margin:"0px"}}>
         <AppBar className={classes.barback} position="static" padding-right="-1px" >
         <Toolbar  >
           <span className={classes.iconise} >
@@ -123,10 +126,10 @@ const Header = () => {
           </Toolbar>
         </AppBar>
         <div onClick={setDate} className="mid-header" align="center" id="welcome">
-          { LoggedIn ? ( <p className="welc-login">Welcome {Username} | <button onClick={setUserStatus}>LogOut</button></p>
+          { loggedIn ? ( <p className="welc-login">Welcome {currentUser} | <button onClick={setUserStatus}>LogOut</button></p>
           ):(
             <p className="welc-login">Welcome Reader | <Link to={"/join-library"}>Join Woke Library</Link> | <Link to={"/login"}>Login</Link></p>
-            )} <p className="date"></p><button onClick={setUserStatus}>LogOut</button>
+            )} <p className="date"></p>
         </div>
       </div>
       );

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import './Form.css'
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Cookies from "js-cookie";
 import { Grid,Typography, Divider } from "@material-ui/core";
 import Library_userDataService from "../services/Library_userService";
 import { makeStyles } from '@material-ui/core/styles';
@@ -164,7 +165,7 @@ const Registration= () => {
           </div>
         ) : (
           <div article-form="true">
-          {console.log(document.cookie)}
+          {console.log(Cookies.get('name'))}
             <TableContainer>
                 <Table className={classes.table} aria-label="simple table">
                   <TableHead>

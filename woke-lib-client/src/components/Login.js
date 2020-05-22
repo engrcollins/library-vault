@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import './Form.css'
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link, useHistory} from "react-router-dom";
+import Cookies from "js-cookie";
 import { Grid,Typography, Divider } from "@material-ui/core";
 import LoginDataService from "../services/LoginService";
 import { makeStyles } from '@material-ui/core/styles';
@@ -42,6 +43,7 @@ const Login= () => {
     username: "",
     password: ""
   };
+  Cookies.remove();
   const [user_login, setUser_login] = useState(initialUser_loginState);
   const [loggedin, setLoggedin] = useState(false);
   const [hidden, setHidden] = useState(true);
@@ -73,6 +75,7 @@ const Login= () => {
         return errors
         }
 
+    const history = useHistory();
   const sendUser_login = () => {
     var data = {
         username: user_login.username,
@@ -87,8 +90,11 @@ const Login= () => {
             username: response.data.username,
             password: response.data.id
         });
+        Cookies.set('name', user_login.username, { expires: 7 });
         setLoggedin(true);
-        console.log(`${user_login.username} logged in!`)
+        console.log(Cookies.get('name'))
+        history.push("/")
+        window.location.reload(false);
     })
       .catch(e => {
         console.log(e);
@@ -101,9 +107,8 @@ const Login= () => {
   const classes = useStyles();
   return (
     <div className="library-form">
-    {console.log(document.cookie)}
       <div className="submit-form">
-        {loggedin ? (
+        {/*loggedin ? (
           <div>
             <br />
             <Typography variant="body1" display="block" className={classes.success} gutterBottom>
@@ -113,9 +118,8 @@ const Login= () => {
             </Link>
             </Typography>
           </div>
-        ) : (
+        ) : (*/}
           <div article-form="true">
-          {console.log(document.cookie)}
             <TableContainer>
                 <Table className={classes.table} aria-label="simple table">
                   <TableHead>
@@ -172,7 +176,7 @@ const Login= () => {
                 <br/>
             </TableContainer>
           </div>
-        )}
+        {/*})*/}
       </div>
     </div>
   );

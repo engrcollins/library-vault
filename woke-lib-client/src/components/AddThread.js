@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import './Form.css'
 import Library_topicDataService from "../services/Library_topicService";
+import Cookies from "js-cookie";
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -58,7 +59,7 @@ const AddThread= () => {
           author: response.data.author
         });
         setSubmitted(true);
-        console.log(response.data);
+        console.log(Cookies.get('name'))
       })
       .catch(e => {
         console.log(e);

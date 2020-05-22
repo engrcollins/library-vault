@@ -1,7 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const session = require('express-session');
 const cookieParser = require('cookie-parser');
+const session = require('express-session');
+var FileStore = require('session-file-store')(session);;
 
 const cors = require("cors");
 
@@ -22,33 +23,60 @@ var corsOptions = {
     } else {
       callback(new Error('Not allowed by CORS'))
     }
-  }
+  },
+  credentials: true
 }
 
 app.use(cors(corsOptions));
 
 // parse requests of content-type: application/json
 app.use(bodyParser.json());
+app.use(cookieParser())
 
 // parse requests of content-type: application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser());
 app.use(session({
 	secret: 'peng',
-	resave: true,
-	saveUninitialized: true
+	resave: false,
+  saveUninitialized: true,
+  store:new FileStore({
+    url: 'localhost:3100'
+  }),
+  cookie:{
+    maxAge:36000,
+    httpOnly:false,
+    secure:false // for normal http connection if https is there we have to set it to true
+    },
+  overwrite: false
 }));
+
 
 // simple route
 app.get("/", (req, res) => {
   if(req.session.page_views){
     req.session.page_views++;
-    res.send("You visited McCollins Technologies " + req.session.page_views + " times, " + req.session.loggedin);
+    res.setHeader('Content-Type', 'text/html')
+    res.write('<p>views: ' + req.session.page_views + '</p>')
+    res.write("<p>You visited McCollins Technologies " + req.session.page_views + ' times, ' + req.sessionID +'</p>')
+    res.end()
  } else {
     req.session.page_views = 1;
     res.json({ message: "Welcome to McCollins Technologies." });
  }
+ console.log(req.sessionID);
 });
+
+//logout route
+app.get('/logout', (req, res) =>{
+  console.log(req.sessionID);
+  req.session.destroy(function(err) {
+    console.log("Session destroyed successfuly");
+    console.log(req.sessionID);
+    res.status(200);
+    res.json({ message: "Session destroyed successfuly" });
+    res.end;
+  })
+})
 
 require("./app/routes/login.routes.js")(app);
 require("./app/routes/user.routes.js")(app);

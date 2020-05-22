@@ -1,5 +1,5 @@
 import axios from "axios";
-
+axios.defaults.withCredentials = true;
 export default axios.create({
   baseURL: "http://localhost:3100",
   headers: {
@@ -7,3 +7,11 @@ export default axios.create({
     "Access-Control-Allow-Origin": "*",
   }
 });
+
+/*axios.defaults.withCredentials = true;
+ axios.get('http://localhost:8080/getDetails',{
+           headers:{
+                    withCredentials:true,
+
+                   }
+  });*/

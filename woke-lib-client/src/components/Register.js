@@ -141,13 +141,14 @@ const Registration= () => {
       .catch(e => {
         console.log(e);
       });
-      
+      console.log(document.cookie);
     }
   };
 
   const classes = useStyles();
   return (
     <div className="library-form">
+    {console.log(document.cookie)}
       <div className="submit-form">
         {submitted ? (
           <div>
@@ -163,6 +164,7 @@ const Registration= () => {
           </div>
         ) : (
           <div article-form="true">
+          {console.log(document.cookie)}
             <TableContainer>
                 <Table className={classes.table} aria-label="simple table">
                   <TableHead>

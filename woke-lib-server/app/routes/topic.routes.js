@@ -6,6 +6,7 @@ module.exports = app => {
   
     // Retrieve all Topics
     app.get("/library_topics", library_topic.findAll);
+
   
     // Retrieve a single Topic with topicId
     app.get("/library_topics/:topicId", library_topic.findOne);

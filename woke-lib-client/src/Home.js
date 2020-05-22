@@ -70,6 +70,7 @@ const Home = () =>{
         setIsLoading(false);
         setLibrary_topics(response.data);
         console.log(response.data);
+        console.log(document.cookie);
       })
       .catch(e => {
         console.log(e);
@@ -96,6 +97,7 @@ const Home = () =>{
   
   return (
     <div className="">
+    {console.log(document.cookie)}
       <Grid container spacing={3} >
         <br />
         <br />

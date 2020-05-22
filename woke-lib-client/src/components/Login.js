@@ -37,6 +37,7 @@ const useStyles = makeStyles({
 });
 
 const Login= () => {
+  console.log(document.cookie);
   const initialUser_loginState = {
     username: "",
     password: ""
@@ -83,7 +84,8 @@ const Login= () => {
         LoginDataService.create(data)
         .then(response => {
           setUser_login({
-            username: response.data
+            username: response.data.username,
+            password: response.data.id
         });
         setLoggedin(true);
         console.log(`${user_login.username} logged in!`)
@@ -99,6 +101,7 @@ const Login= () => {
   const classes = useStyles();
   return (
     <div className="library-form">
+    {console.log(document.cookie)}
       <div className="submit-form">
         {loggedin ? (
           <div>
@@ -112,6 +115,7 @@ const Login= () => {
           </div>
         ) : (
           <div article-form="true">
+          {console.log(document.cookie)}
             <TableContainer>
                 <Table className={classes.table} aria-label="simple table">
                   <TableHead>

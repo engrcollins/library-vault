@@ -1,4 +1,5 @@
 const Login_user = require("../models/login_user.model.js");
+
 exports.create = (req, res) => {
   // Validate request
   if (!req.body) {
@@ -20,11 +21,22 @@ exports.create = (req, res) => {
           err.message || "Invalid credentials"
       });
     }else{
-      req.session.user = data.username;
-      req.session.loggedin = true;
-      console.log(req.session.loggedin)
-      console.log(req.session.user)
-      return res.send(data.username);
+      //sessionData = req.session;
+      /*sessionData.user = {};
+      let username = data.username;
+      let id = data.user_id;
+      sessionData.user.username = username;
+      sessionData.user.id =  id;*/
+      console.log(data)
+      console.log(req.sessionID);
+      if(req.session.page_views){
+        req.session.page_views++;
+        console.log("You visited McCollins Technologies " + req.session.page_views + " times, " + req.session.loggedin);
+     } else {
+        req.session.page_views = 1;
+        console.log({ message: "Welcome to McCollins Technologies." });
+     }
+      res.send(data)
     }
   });
 }

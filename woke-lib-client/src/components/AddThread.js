@@ -73,6 +73,7 @@ const AddThread= () => {
   const classes = useStyles();
   return (
     <div className="library_topic-form">
+    {console.log(document.cookie)}
       <div className="submit-form">
         {submitted ? (
           <div>
@@ -83,6 +84,7 @@ const AddThread= () => {
           </div>
         ) : (
           <div article-form="true">
+          {console.log(document.cookie)}v
             <TableContainer>
                 <Table className={classes.table} aria-label="simple table">
                   <TableHead>

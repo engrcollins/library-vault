@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link, useHistory } from "react-router-dom";
 import Cookies from "js-cookie";
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -85,6 +85,7 @@ const Header = () => {
     }
     setInterval(setDate,1000);
 
+    const history = useHistory();
     const useStyles = makeStyles((theme) => ({
       iconise: {
         display: 'flex',
@@ -106,6 +107,7 @@ const Header = () => {
     const setUserStatus = () => {
       Cookies.remove('name');
       console.log("Cookies removed");
+      history.push("/")
       window.location.reload(false);
     };
   
@@ -126,7 +128,7 @@ const Header = () => {
           </Toolbar>
         </AppBar>
         <div onClick={setDate} className="mid-header" align="center" id="welcome">
-          { loggedIn ? ( <p className="welc-login">Welcome {currentUser} | <button onClick={setUserStatus}>LogOut</button></p>
+          { loggedIn ? ( <p className="welc-login">Welcome <Link to={"/profile/" + currentUser}>{currentUser}</Link> | <button onClick={setUserStatus}>LogOut</button></p>
           ):(
             <p className="welc-login">Welcome Reader | <Link to={"/join-library"}>Join Woke Library</Link> | <Link to={"/login"}>Login</Link></p>
             )} <p className="date"></p>

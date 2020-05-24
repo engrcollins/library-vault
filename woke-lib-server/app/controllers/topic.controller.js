@@ -13,7 +13,7 @@ exports.create = (req, res) => {
   const library_topic = new Library_topic({
     title: req.body.title,
     content: req.body.content,
-    category: req.body.title,
+    category: req.body.category,
     tags: req.body.tags
   });
 

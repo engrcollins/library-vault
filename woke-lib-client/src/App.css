@@ -61,7 +61,7 @@ body{
 
 .navbar {
   height: 45px;
-  margin-top: 4px;
+  padding-top: 5px;
   background-color: rgb(151, 146, 172);
   font-size: 15px;
 }
@@ -71,7 +71,7 @@ body{
   color: rgb(36, 34, 34);
   font-weight: bolder;
   text-align: center;
-  padding: 16px 7px;
+  padding: 1px 7px;
   text-decoration: none;
 }
 
@@ -84,7 +84,7 @@ body{
   border: none;
   outline: none;
   color: rgb(36, 34, 34);
-  padding: 14px 16px;
+  padding: 0px 8px;
   background-color: inherit;
   font-family: inherit;
   font-weight: bolder;
@@ -109,7 +109,7 @@ body{
 .dropdown-content a {
   float: none;
   color: black;
-  padding: 12px 16px;
+  padding: 3px 8px;
   text-decoration: none;
   display: block;
   text-align: left;
@@ -135,8 +135,8 @@ body{
 }
 .searchbox{
   background-color: #ffffcc;
-  padding-left: 5px;
-  margin-top: 9px;
+  padding-left: 1px;
+  margin-top: 3px;
   width: 60%;
   height: 34px;
   border-radius: 12px;
@@ -151,8 +151,7 @@ body{
 } 
 
 .search-button{
-
-
+  font-family: inherit;
 }
 
 .appContainer{

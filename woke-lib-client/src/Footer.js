@@ -44,7 +44,7 @@ const Footer = () => {
             <Grid item xs={12} sm={8} style={{textAlign:"left", paddingLeft: "14px"}}>
                 <Typography variant="caption" gutterBottom>
                        <p><b>Disclaimer: </b>
-                       Every member of The Woke Library is solely responsible for anything they post on or upload to the library forum
+                       Every member of The Woke Library is solely responsible for anything <br/> they post on or upload to the library forum
                         </p>
                         
                 </Typography>
@@ -71,7 +71,7 @@ const Footer = () => {
                     <p>
                         <a href="#"> <InfoIcon style={{ display: "inline-block", marginBottom:"-5px", fontSize:"20px" }}/>About Us</a> &nbsp;|&nbsp; <a href="#"> <PolicyIcon style={{ display: "inline-block", marginBottom:"-5px", fontSize:"20px" }}/>Privacy Policy</a> &nbsp;|&nbsp; <a href="#"><LiveHelpIcon style={{ display: "inline-block", marginBottom:"-5px", fontSize:"20px" }}/>FAQ</a> &nbsp;|&nbsp; <a href="#"><FeaturedVideoIcon style={{ display: "inline-block", marginBottom:"-5px", fontSize:"20px" }}/>Advertise</a>
                     </p>
-                    <p id="copyright"><b>McCollins Technologies &copy; 2019 - <span className="copyright"></span></b></p>
+                    <p id="copyright"> &copy; McCollins Technologies 2019 - <span className="copyright"></span></p>
                 </Typography>
             </Grid>
         </Grid>

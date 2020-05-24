@@ -98,13 +98,13 @@ const Registration= () => {
       firstName: library_user.firstName,
       lastName: library_user.lastName,
       gender: library_user.gender,
-      birthDate: library_user.birthDate,
+      birthDate: library_user.birthDate.toLocaleString(),
       username: library_user.username,
       phone: library_user.phone,
       email: library_user.email,
       password: library_user.password,
       confirmPassword: library_user.confirmPassword,
-      createdAt: new Date().toISOString().slice(0, 19).replace('T', ' ')
+      createdAt: new Date().toLocaleString(),
     };
     const errors = validateForm(data)
     setErrors(errors)

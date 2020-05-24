@@ -5,6 +5,7 @@ import LayersIcon from '@material-ui/icons/Layers';
 //import "bootstrap/dist/css/bootstrap.min.css";
 import Header from './Header';
 import ArchiveNav from './Navigation';
+import Profile from './components/Profile';
 import Side from './SideNav.js';
 import "./App.css";
 import Home from "./Home";
@@ -31,6 +32,7 @@ function App() {
                   <Switch>
                       <Route path="/join-library" component={Registration} />
                       <Route path="/login" component={Login} />
+                      <Route path="/profile/:username" component={Profile} />
                       {/*<Route path="/add" component={AddCustomer} />*/}
                       <Route path="/add-new-thread" component={AddThread} />
                       <Route path="/" component={Home} />

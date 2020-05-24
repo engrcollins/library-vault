@@ -30,10 +30,11 @@ const useStyles = makeStyles({
   },
   sub: {
     marginLeft: 35,
-    marginTop: 0,
-    paddingTop: 1,
+    marginTop: -2,
+    paddingTop: 0,
     paddingLeft: 5,
     fontSize: 12,
+    color: "rgb(41, 61, 61)"
   },
   para: {
     marginLeft: 30,
@@ -101,7 +102,7 @@ const Home = () =>{
       <Grid container spacing={3} >
         <br />
         <br />
-        <Grid item xs={12} sm={8} lg={8} className="appContent">
+        <Grid item xs={12} sm={8} lg={9} className="appContent">
           {isLoading ? (<div>Data loading, please wait..
         <Loader type="ThreeDots" color="#00BFFF" height={50} width={50} />
           </div>) : (
@@ -120,11 +121,9 @@ const Home = () =>{
                       {library_topic.title}
                     </Typography>
                     <Typography variant="subtitle2" color="textSecondary" className={classes.sub}>
-                        September 14, 2020. | Author: {library_topic.author}.
+                      {new Date(library_topic.createdAt).toUTCString().slice(0, 30)} | Author: {library_topic.author}.
                     </Typography>
-                    <Typography variant="body2" component="p" className={classes.para}>
-                    {library_topic.content}
-                      <br />
+                    <Typography variant="body2" component="p" className={classes.para}>{library_topic.content.substring(0, 224)+"..."} <Link to={"/"+ library_topic.category+"/"+library_topic.topic_id}>read more</Link>
                     </Typography>
                   </CardContent>
                   <CardActions className={classes.action}>
@@ -139,8 +138,8 @@ const Home = () =>{
               </div>
           )}
         </Grid>
-        <Grid item xs={12} sm={3} lg={3} className="rightSide">
-          <h4>Related Articles</h4>
+        <Grid item xs={12} sm={3} lg={2} className="rightSide">
+          <h4></h4>
         </Grid>
       </Grid>
     </div>

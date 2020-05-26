@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import './Form.css'
 import { BrowserRouter as Router, Switch, Route, Link, useHistory} from "react-router-dom";
 import Cookies from "js-cookie";
-import { Grid,Typography, Divider } from "@material-ui/core";
+import { Grid, Typography, Paper } from "@material-ui/core";
 import LoginDataService from "../services/LoginService";
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -17,13 +17,17 @@ import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import CheckCircleTwoToneIcon from '@material-ui/icons/CheckCircleTwoTone';
 
 const useStyles = makeStyles({
-    root: {
-      width: '100%',
-      minWidth: 410,
-    },
-    table: {
-      minWidth: 360,
-    },
+  root: {
+      padding: 1,
+      width: '99%',
+      padding: 2,
+      border: 2,
+      borderColor: 'rgb(51, 173, 255)',
+  },
+  table: {
+    minWidth: 400,
+    maxWidth: 550,
+  },
     active: {
       backgroundColor: 'rgba(255, 255, 255, 0.12)',
     },
@@ -92,8 +96,8 @@ const Login= () => {
         });
         Cookies.set('name', user_login.username, { expires: 7 });
         setLoggedin(true);
-        console.log(Cookies.get('name'))
-        history.push("/")
+        console.log(Cookies.get('name'));
+        history.push("/");
         window.location.reload(false);
     })
       .catch(e => {
@@ -106,21 +110,12 @@ const Login= () => {
 
   const classes = useStyles();
   return (
-    <div className="library-form">
-      <div className="submit-form">
-        {/*loggedin ? (
-          <div>
-            <br />
-            <Typography variant="body1" display="block" className={classes.success} gutterBottom>
-            <CheckCircleTwoToneIcon style={{fontSize:'26px', padding:'-2px'}}/>
-            <b>Login successful!,  continue to </b><Link to={"/"}>
-             Library.
-            </Link>
-            </Typography>
-          </div>
-        ) : (*/}
-          <div article-form="true">
-            <TableContainer>
+    <div className="">
+    {console.log(document.cookie)}
+    <Grid container >
+      <Grid item  xs={12} sm={8} lg={9}  spacing={1} component={Paper}  className={classes.root}>
+      <div className="library-form">
+          <TableContainer align="center">
                 <Table className={classes.table} aria-label="simple table">
                   <TableHead>
                     <TableRow>
@@ -175,11 +170,14 @@ const Login= () => {
                 </button>
                 <br/>
             </TableContainer>
-          </div>
-        {/*})*/}
+            
       </div>
+    </Grid>
+    <Grid item xs={12} sm={8} lg={9}  spacing={1} component={Paper}  className={classes.root}>
+    </Grid>
+    </Grid>
     </div>
-  );
+    );
 };
 
 export default Login;

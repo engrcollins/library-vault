@@ -16,6 +16,10 @@ const useStyles = makeStyles({
   root: {
     padding: 0,
   },
+
+  bar: {
+    maxHeight: 105,
+  },
   button: {
       borderRadius: 20,
     },
@@ -30,7 +34,7 @@ const useStyles = makeStyles({
   });
 
 const ArchiveNav = () =>{
-  const category = "life";
+  const category = "others";
 
     //Search Catalog
     const searchCatalog = () =>{ 
@@ -50,44 +54,46 @@ const ArchiveNav = () =>{
       const classes = useStyles();
         return(
             <div>
-            <div className="navbar">
+            <div className="navbar" >
               <Typography variant="h6" component="h7" >
                     <Link to={"/"} className={classes.links}>
                       <ListItemText primary="HOME" styles={{fontWeight:"bold"}}/>
                     </Link>
                           <div className="dropdown">
-                            <button className="dropbtn"><Link to={"/category/" + category} className={classes.links}>
+                            <span id="dd">
+                            <button className="dropbtn">
                               <ListItemText primary="CATEGORIES" />
-                            </Link></button>
+                            </button>
+                            </span>
                               <div className="dropdown-content">
-                                <Link to={"/category/" + category} className={classes.links}>
+                                <Link to={"/category/Life"} className={classes.links}>
                                   <ListItemText primary="Life" />
                                 </Link>
-                                <Link to={"/category/" + category}>
+                                <Link to={"/category/career-business" + category}>
                                   <ListItemText primary="Career & Business" />
                                 </Link>
-                                <Link to={"/category/" + category}>
+                                <Link to={"/category/education" + category}>
                                   <ListItemText primary="Education" />
                                 </Link>
-                                <Link to={"/category/" + category}>
+                                <Link to={"/category/health" + category}>
                                   <ListItemText primary="Health" />
                                 </Link>
-                                <Link to={"/category/" + category}>
+                                <Link to={"/category/religion" + category}>
                                   <ListItemText primary="Religion" />
                                 </Link>
-                                <Link to={"/category/" + category}>
+                                <Link to={"/categorysex-sexualities" + category}>
                                   <ListItemText primary="Sex & Sexualities" />
                                 </Link>
-                                <Link to={"/category/" + category} className={classes.links}>
+                                <Link to={"/category/travelling-lifestyle" + category} className={classes.links}>
                                   <ListItemText primary="Travelling & Lifestyle" />
                                 </Link>
-                                <Link to={"/category/" + category} className={classes.links}>
+                                <Link to={"/category/science-universe" + category} className={classes.links}>
                                   <ListItemText primary="Science & Universe" />
                                 </Link>
-                                <Link to={"/category/" + category} className={classes.links}>
+                                <Link to={"/category/quotes" + category} className={classes.links}>
                                   <ListItemText primary="Quotes" />
                                 </Link>
-                                <Link to={"/category/" + category} className={classes.links}>
+                                <Link to={"/category/books-biography" + category} className={classes.links}>
                                   <ListItemText primary="Books & Biography" />
                                 </Link>
                               </div>

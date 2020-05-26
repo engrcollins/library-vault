@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import './Form.css'
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Cookies from "js-cookie";
-import { Grid,Typography, Divider } from "@material-ui/core";
+import { Grid,Typography, makeStyles, Paper} from "@material-ui/core";
 import Library_userDataService from "../services/Library_userService";
-import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -17,13 +16,17 @@ import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import CheckCircleTwoToneIcon from '@material-ui/icons/CheckCircleTwoTone';
 
 const useStyles = makeStyles({
-    root: {
-      width: '100%',
-      minWidth: 410,
-    },
-    table: {
-      minWidth: 360,
-    },
+  root: {
+    paddingLeft: -1,
+    width: '99%',
+    padding: 1,
+    border: 1,
+    borderColor: 'rgb(51, 173, 255)',
+  },
+  table: {
+    minWidth: 420,
+    maxWidth: 550,
+  },
     active: {
       backgroundColor: 'rgba(255, 255, 255, 0.12)',
     },
@@ -38,6 +41,13 @@ const useStyles = makeStyles({
   });
 
 const Registration= () => {
+  const currentUser =  Cookies.get('name');
+  if (typeof currentUser === 'string'){
+    Cookies.remove('name')
+    window.location.reload(false);
+  }else {
+      console.log('no user')
+  };
   const initialLibrary_userState = {
     id: null,
     firstName: "",
@@ -148,12 +158,13 @@ const Registration= () => {
 
   const classes = useStyles();
   return (
-    <div className="library-form">
+    <div className="">
     {console.log(document.cookie)}
-      <div className="submit-form">
+    <Grid container>
+        <Grid item align="center" xs={12} sm={8} lg={9}  spacing={1} component={Paper}  className={classes.root}>
+        <div className="library-form">
         {submitted ? (
           <div>
-            <br />
             <Typography variant="body1" display="block" className={classes.success} gutterBottom>
             <CheckCircleTwoToneIcon style={{fontSize:'26px', padding:'-2px'}}/>
             Registration successful! Your Woke Library username is <b>{library_user.username}.</b>
@@ -162,194 +173,198 @@ const Registration= () => {
             <Link to={"/login"}>
               Login to Woke Library
             </Link>
-          </div>
-        ) : (
-          <div article-form="true">
-          {console.log(Cookies.get('name'))}
-            <TableContainer>
-                <Table className={classes.table} aria-label="simple table">
-                  <TableHead>
-                    <TableRow>
-                      <TableCell colSpan={2} align="center"><strong>Library Registration Form</strong>
-                        </TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    <TableRow>
-                    <TableCell align="left"><label className="labelling" htmlFor="firstName">First Name: </label></TableCell>
-                    <TableCell align="left"><input
-                        type="text"
-                        className="input-field"
-                        id="firstName"
-                        required
-                        placeholder="Type your first name here"
-                        value={library_user.firstName}
-                        onChange={handleInputChange}
-                        name="firstName"
-                    />
-                        <Typography variant="caption" display="block" className={classes.warnings} gutterBottom>
-                          {errors.firstName && <p>{errors.firstName}</p>}
-                          </Typography>
-                    </TableCell>
-                    </TableRow>
+            </div>
+      ) : (
+        <div>
+            <TableContainer align="center">
+                <Table  className={classes.table} aria-label="simple table">
+                        <TableHead>
+                          <TableRow>
+                            <TableCell colSpan={2} align="center"><strong>Library Registration Form</strong>
+                              </TableCell>
+                          </TableRow>
+                        </TableHead>
+                        <TableBody>
+                          <TableRow>
+                          <TableCell align="left"><label className="labelling" htmlFor="firstName">First Name: </label></TableCell>
+                          <TableCell align="left"><input
+                              type="text"
+                              className="input-field"
+                              id="firstName"
+                              required
+                              placeholder="Type your first name here"
+                              value={library_user.firstName}
+                              onChange={handleInputChange}
+                              name="firstName"
+                          />
+                              <Typography variant="caption" display="block" className={classes.warnings} gutterBottom>
+                                {errors.firstName && <p>{errors.firstName}</p>}
+                                </Typography>
+                          </TableCell>
+                          </TableRow>
 
-                    <TableRow>
-                    <TableCell align="left"><label className="labelling" htmlFor="lastName">Last Name: </label></TableCell>
-                    <TableCell align="left"><input
-                        type="text"
-                        className="input-field"
-                        id="lastName"
-                        required
-                        placeholder="Type your last name here"
-                        value={library_user.lastName}
-                        onChange={handleInputChange}
-                        name="lastName"
-                    />
-                      <Typography variant="caption" display="block" className={classes.warnings} gutterBottom>
-                        {errors.lastName && <p>{errors.lastName}</p>}
-                          </Typography>
-                    </TableCell>
-                    </TableRow>
+                          <TableRow>
+                          <TableCell align="left"><label className="labelling" htmlFor="lastName">Last Name: </label></TableCell>
+                          <TableCell align="left"><input
+                              type="text"
+                              className="input-field"
+                              id="lastName"
+                              required
+                              placeholder="Type your last name here"
+                              value={library_user.lastName}
+                              onChange={handleInputChange}
+                              name="lastName"
+                          />
+                            <Typography variant="caption" display="block" className={classes.warnings} gutterBottom>
+                              {errors.lastName && <p>{errors.lastName}</p>}
+                                </Typography>
+                          </TableCell>
+                          </TableRow>
 
-                    <TableRow>
-                    <TableCell align="left"><label className="labelling" htmlFor="gender">Gender: </label></TableCell>
-                    <TableCell align="left"><select id="gender" required value={library_user.gender || ""}
-                        onChange={handleInputChange} name="gender">
-                        <option value="" disabled selected hidden>Please choose your gender...</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                        <option value="Undisclosed">Prefer not to Disclose</option>           
-                      </select>
-                      <Typography variant="caption" display="block" className={classes.warnings} gutterBottom>
-                        {errors.gender && <p>{errors.gender}</p>}
-                          </Typography>
-                    </TableCell>
-                    </TableRow>
+                          <TableRow>
+                          <TableCell align="left"><label className="labelling" htmlFor="gender">Gender: </label></TableCell>
+                          <TableCell align="left"><select id="gender" required value={library_user.gender || ""}
+                              onChange={handleInputChange} name="gender">
+                              <option value="" disabled selected hidden>Please choose your gender...</option>
+                              <option value="Male">Male</option>
+                              <option value="Female">Female</option>
+                              <option value="Undisclosed">Prefer not to Disclose</option>           
+                            </select>
+                            <Typography variant="caption" display="block" className={classes.warnings} gutterBottom>
+                              {errors.gender && <p>{errors.gender}</p>}
+                                </Typography>
+                          </TableCell>
+                          </TableRow>
 
-                    <TableRow>
-                    <TableCell align="left"><label className="labelling" htmlFor="birthDate">Date of Birth: </label></TableCell>
-                    <TableCell align="left"><TextField
-                        id="birthDate"
-                        label="Birthday"
-                        type="date"
-                        defaultValue="2000-01-24"
-                        value={library_user.birthDate}
-                        onChange={handleInputChange}
-                        name="birthDate"
-                        InputLabelProps={{
-                        shrink: true,
-                        }}
-                    />
-                      <Typography variant="caption" display="block" className={classes.warnings} gutterBottom>
-                        {errors.birthDate && <p>{errors.birthDate}</p>}
-                          </Typography>
-                    </TableCell>
-                    </TableRow>
+                          <TableRow>
+                          <TableCell align="left"><label className="labelling" htmlFor="birthDate">Date of Birth: </label></TableCell>
+                          <TableCell align="left"><TextField
+                              id="birthDate"
+                              label="Birthday"
+                              type="date"
+                              defaultValue="2000-01-24"
+                              value={library_user.birthDate}
+                              onChange={handleInputChange}
+                              name="birthDate"
+                              InputLabelProps={{
+                              shrink: true,
+                              }}
+                          />
+                            <Typography variant="caption" display="block" className={classes.warnings} gutterBottom>
+                              {errors.birthDate && <p>{errors.birthDate}</p>}
+                                </Typography>
+                          </TableCell>
+                          </TableRow>
 
-                    <TableRow>
-                    <TableCell align="left"><label className="labelling" htmlFor="username">Username: </label></TableCell>
-                    <TableCell align="left"><input
-                        type="text"
-                        className="input-field"
-                        id="username"
-                        required
-                        placeholder="Pick a username(min of 4 characters)"
-                        value={library_user.username|| ""}
-                        onChange={handleInputChange}
-                        name="username"
-                    />
-                      <Typography variant="caption" display="block" className={classes.warnings} gutterBottom>
-                        {errors.username && <p>{errors.username}</p>}
-                          </Typography>
-                    </TableCell>
-                    </TableRow>
-                    
-                    <TableRow>
-                    <TableCell align="left"><label className="labelling" htmlFor="phone">Phone: </label></TableCell>
-                    <TableCell align="left"><input
-                        type="text"
-                        className="input-field"
-                        id="phone"
-                        required
-                        placeholder="Input your mobile phone number"
-                        value={library_user.phone|| ""}
-                        onChange={handleInputChange}
-                        name="phone"
-                    />
-                      <Typography variant="caption" display="block" className={classes.warnings} gutterBottom>
-                          {errors.phone && <p>{errors.phone}</p>}
-                          </Typography>
-                    </TableCell>
-                    </TableRow>
+                          <TableRow>
+                          <TableCell align="left"><label className="labelling" htmlFor="username">Username: </label></TableCell>
+                          <TableCell align="left"><input
+                              type="text"
+                              className="input-field"
+                              id="username"
+                              required
+                              placeholder="Pick a username(min of 4 characters)"
+                              value={library_user.username|| ""}
+                              onChange={handleInputChange}
+                              name="username"
+                          />
+                            <Typography variant="caption" display="block" className={classes.warnings} gutterBottom>
+                              {errors.username && <p>{errors.username}</p>}
+                                </Typography>
+                          </TableCell>
+                          </TableRow>
+                          
+                          <TableRow>
+                          <TableCell align="left"><label className="labelling" htmlFor="phone">Phone: </label></TableCell>
+                          <TableCell align="left"><input
+                              type="text"
+                              className="input-field"
+                              id="phone"
+                              required
+                              placeholder="Input your mobile phone number"
+                              value={library_user.phone|| ""}
+                              onChange={handleInputChange}
+                              name="phone"
+                          />
+                            <Typography variant="caption" display="block" className={classes.warnings} gutterBottom>
+                                {errors.phone && <p>{errors.phone}</p>}
+                                </Typography>
+                          </TableCell>
+                          </TableRow>
 
-                    <TableRow>
-                    <TableCell align="left"><label className="labelling" htmlFor="email">e-mail: </label></TableCell>
-                    <TableCell align="left"><input
-                        type="text"
-                        className="input-field"
-                        id="email"
-                        required
-                        placeholder="Input your email address"
-                        value={library_user.email|| ""}
-                        onChange={handleInputChange}
-                        name="email"
-                    />
-                      <Typography variant="caption" display="block" className={classes.warnings} gutterBottom>
-                        {errors.email && <p>{errors.email}</p>}
-                          </Typography>
-                    </TableCell>
-                    </TableRow>
+                          <TableRow>
+                          <TableCell align="left"><label className="labelling" htmlFor="email">e-mail: </label></TableCell>
+                          <TableCell align="left"><input
+                              type="text"
+                              className="input-field"
+                              id="email"
+                              required
+                              placeholder="Input your email address"
+                              value={library_user.email|| ""}
+                              onChange={handleInputChange}
+                              name="email"
+                          />
+                            <Typography variant="caption" display="block" className={classes.warnings} gutterBottom>
+                              {errors.email && <p>{errors.email}</p>}
+                                </Typography>
+                          </TableCell>
+                          </TableRow>
 
-                    <TableRow>
-                    <TableCell align="left"><label className="labelling" htmlFor="password">Password: </label></TableCell>
-                    <TableCell align="left"><input
-                        type={hidden ? "password" : "text"}
-                        className="input-field"
-                        id="password"
-                        required
-                        placeholder="Pick a password(min of 8 characters)"
-                        value={library_user.password|| ""}
-                        onChange={handleInputChange}
-                        name="password"
-                    />
-                      <Typography variant="caption" display="block" className={classes.warnings} gutterBottom>
-                        {errors.password && <p>{errors.password}</p>}
-                          </Typography>
-                    </TableCell>
-                    </TableRow>
+                          <TableRow>
+                          <TableCell align="left"><label className="labelling" htmlFor="password">Password: </label></TableCell>
+                          <TableCell align="left"><input
+                              type={hidden ? "password" : "text"}
+                              className="input-field"
+                              id="password"
+                              required
+                              placeholder="Pick a password(min of 8 characters)"
+                              value={library_user.password|| ""}
+                              onChange={handleInputChange}
+                              name="password"
+                          />
+                            <Typography variant="caption" display="block" className={classes.warnings} gutterBottom>
+                              {errors.password && <p>{errors.password}</p>}
+                                </Typography>
+                          </TableCell>
+                          </TableRow>
 
-                    <TableRow>
-                    <TableCell align="left"><label className="labelling" htmlFor="confirmPassword">Confirm Password: </label></TableCell>
-                    <TableCell align="left" ><input
-                        type={hidden ? "password" : "text"}
-                        className="input-field"
-                        id="confirmPassword"
-                        required
-                        placeholder="Retype your password here"
-                        value={library_user.confirmPassword|| ""}
-                        onChange={handleInputChange}
-                        name="confirmPassword"
-                    />
-                      &ensp;<button onClick={toggleShow}>{hidden ? (<VisibilityOffIcon style={{fontSize:'20px', width: '11px', height: '11px', padding:'-2px'}}/>) : (<VisibilityIcon style={{fontSize:'20px', width: '11px', height: '11px', padding:'-2px'}} />)}
+                          <TableRow>
+                          <TableCell align="left"><label className="labelling" htmlFor="confirmPassword">Confirm Password: </label></TableCell>
+                          <TableCell align="left" ><input
+                              type={hidden ? "password" : "text"}
+                              className="input-field"
+                              id="confirmPassword"
+                              required
+                              placeholder="Retype your password here"
+                              value={library_user.confirmPassword|| ""}
+                              onChange={handleInputChange}
+                              name="confirmPassword"
+                          />
+                            &ensp;<button onClick={toggleShow}>{hidden ? (<VisibilityOffIcon style={{fontSize:'20px', width: '11px', height: '11px', padding:'-2px'}}/>) : (<VisibilityIcon style={{fontSize:'20px', width: '11px', height: '11px', padding:'-2px'}} />)}
+                            </button>
+                          <Typography variant="caption" display="block" className={classes.warnings} gutterBottom>
+                                {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+                                </Typography>
+                          </TableCell>
+                          </TableRow>
+                      </TableBody>
+                      </Table>
+
+                      <p>{submit_error}</p>
+                      <button onClick={saveLibrary_user} className="btn btn-success">
+                      Submit
                       </button>
-                    <Typography variant="caption" display="block" className={classes.warnings} gutterBottom>
-                          {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-                          </Typography>
-                    </TableCell>
-                    </TableRow>
-                </TableBody>
-                </Table>
-
-                <p>{submit_error}</p>
-                <button onClick={saveLibrary_user} className="btn btn-success">
-                Submit
-                </button>
-                <br/>
-            </TableContainer>
-          </div>
-        )}
+                      <br/>
+                  </TableContainer>
+                </div>
+            )}
+            </div>
+          </Grid>
+          <Grid item xs={12} sm={4} lg={3}  spacing={1} component={Paper}  className={classes.root}>
+          
+          </Grid>
+        </Grid>
       </div>
-    </div>
   );
 };
 

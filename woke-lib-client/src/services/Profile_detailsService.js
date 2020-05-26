@@ -7,7 +7,7 @@ const get = username => {
 
 
 const update = (id, data) => {
-  return http.put(`/profile_details/${id}`, data);
+  return http.put(`/profile/${id}`, data);
 };
 
 const remove = id => {

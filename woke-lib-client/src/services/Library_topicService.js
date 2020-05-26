@@ -4,11 +4,13 @@ const getAll = () => {
   return http.get("/library_topics");
 };
 
-const get = id => {
-  return http.get(`/library_topics/${id}`);
+const get = topic_id => {
+  console.log(topic_id)
+return http.get(`/library_topics/${topic_id}`);
 };
 
 const create = data => {
+  console.log(data)
   return http.post("/library_topics", data);
 };
 

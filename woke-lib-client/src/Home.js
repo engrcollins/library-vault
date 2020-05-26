@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { makeStyles } from '@material-ui/core/styles';
 import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
 import './Home.css'
 import Library_topicDataService from "./services/Library_topicService";
-import { Grid,Typography, Divider } from "@material-ui/core";
+import { Grid,Typography, Paper, Divider, makeStyles} from "@material-ui/core";
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
@@ -16,12 +15,11 @@ import AnchorLink from 'react-anchor-link-smooth-scroll';
 
 const useStyles = makeStyles({
   root: {
-    width: '100%',
-    minWidth: 410,
-    padding: 2,
-    marginBottom: 2,
-    border: 2,
-  },
+    padding: 1,
+      width: '100%',
+      padding: 2,
+      border: 2,
+    },
   topic: {
     display: 'flex'
   },
@@ -99,14 +97,13 @@ const Home = () =>{
   return (
     <div className="">
     {console.log(document.cookie)}
-      <Grid container spacing={3} >
-        <br />
-        <br />
-        <Grid item xs={12} sm={8} lg={9} className="appContent">
-          {isLoading ? (<div>Data loading, please wait..
-        <Loader type="ThreeDots" color="#00BFFF" height={50} width={50} />
-          </div>) : (
-              <div className="article-list" className={classes.root}>
+    <Grid container>
+        <Grid item xs={12} sm={8} lg={9}  spacing={1} component={Paper}  className={classes.root}>
+            {isLoading ? (<div>Data loading, please wait..
+                <Loader type="ThreeDots" color="#00BFFF" height={50} width={50} />
+                </div>
+            ) : (
+                <div align="center">
                   <Card className={classes.root} variant="outlined" component="nav" >
                     {library_topics &&
                       library_topics.map((library_topic, index) => (
@@ -123,7 +120,7 @@ const Home = () =>{
                     <Typography variant="subtitle2" color="textSecondary" className={classes.sub}>
                       {new Date(library_topic.createdAt).toUTCString().slice(0, 30)} | Author: {library_topic.author}.
                     </Typography>
-                    <Typography variant="body2" component="p" className={classes.para}>{library_topic.content.substring(0, 224)+"..."} <Link to={"/"+ library_topic.category+"/"+library_topic.topic_id}>read more</Link>
+                    <Typography variant="body2" component="p" className={classes.para}>{library_topic.content.substring(0, 224)+"..."}<Link to={`/category/${library_topic.category}/${library_topic.topic_id}`}>read more</Link>
                     </Typography>
                   </CardContent>
                   <CardActions className={classes.action}>
@@ -138,8 +135,8 @@ const Home = () =>{
               </div>
           )}
         </Grid>
-        <Grid item xs={12} sm={3} lg={2} className="rightSide">
-          <h4></h4>
+        <Grid item xs={13} sm={3} lg={2} className="rightSide">
+          <h4>we we</h4>
         </Grid>
       </Grid>
     </div>

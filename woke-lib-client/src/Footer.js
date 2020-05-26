@@ -44,7 +44,7 @@ const Footer = () => {
             <Grid item xs={12} sm={8} style={{textAlign:"left", paddingLeft: "14px"}}>
                 <Typography variant="caption" gutterBottom>
                        <p><b>Disclaimer: </b>
-                       Every member of The Woke Library is solely responsible for anything <br/> they post on or upload to the library forum
+                       Every member of The Woke Library is solely responsible <br/>for anything they post on or upload to the library forum
                         </p>
                         
                 </Typography>
@@ -58,15 +58,15 @@ const Footer = () => {
                         <br/>
                             <EmailIcon style={{ display: "inline-block", marginBottom:"-5px", fontSize:"20px" }}/> wokelibrary@gmail.com.
                         <br/>
-                            Follow us on: <a href="https://twitter.com/engrcollins14" target="_blank">
+                            Follow us on: <a href="#" target="_blank">
                             <TwitterIcon style={{ display: "inline-block", marginBottom:"-5px", fontSize:"20px" }}/>Twitter,</a> &nbsp;
-                            <a href="https://facebook.com/engrcollins14" target="_blank"><FacebookIcon style={{ display: "inline-block", marginBottom:"-5px", fontSize:"20px" }}/>Facebook, </a> &nbsp;
-                            <a href="https://qr.ae/TmZyQH" target="_blank">Quora, </a> &nbsp;
-                            <a href="https://medium.com" target="_blank">Medium.</a>
+                            <a href="#" target="_blank"><FacebookIcon style={{ display: "inline-block", marginBottom:"-5px", fontSize:"20px" }}/>Facebook, </a> &nbsp;
+                            <a href="#" target="_blank">Quora, </a> &nbsp;
+                            <a href="#" target="_blank">Medium.</a>
                     </p> 
                 </Typography>
             </Grid>
-            <Grid item xs={12} sm={12} style={{padding:"1px", marginTop:"-15px", textAlign:"center"}} >
+            <Grid item xs={12} sm={12} style={{padding:"1px", marginTop:"-11px", textAlign:"center"}} >
                 <Typography variant = "caption">
                     <p>
                         <a href="#"> <InfoIcon style={{ display: "inline-block", marginBottom:"-5px", fontSize:"20px" }}/>About Us</a> &nbsp;|&nbsp; <a href="#"> <PolicyIcon style={{ display: "inline-block", marginBottom:"-5px", fontSize:"20px" }}/>Privacy Policy</a> &nbsp;|&nbsp; <a href="#"><LiveHelpIcon style={{ display: "inline-block", marginBottom:"-5px", fontSize:"20px" }}/>FAQ</a> &nbsp;|&nbsp; <a href="#"><FeaturedVideoIcon style={{ display: "inline-block", marginBottom:"-5px", fontSize:"20px" }}/>Advertise</a>

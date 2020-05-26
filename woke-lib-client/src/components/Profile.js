@@ -29,10 +29,11 @@ import FacebookIcon from '@material-ui/icons/Facebook';
 
 const useStyles = makeStyles({
     root: {
-      width: '100%',
-      minWidth: 450,
-      border: 2,
-      borderColor: 'rgb(51, 173, 255)',
+        padding: 1,
+        width: '99%',
+        padding: 2,
+        border: 2,
+        borderColor: 'rgb(51, 173, 255)',
     },
     image: {
         width: 150,
@@ -81,7 +82,7 @@ const Profile = props => {
             <Grid container spacing={3} >
                 <br />
                 <br />
-                <Grid item xs={12} sm={8} lg={8} className="appContent">
+                <Grid item xs={12} sm={8} lg={8} >
                     {isLoading ? (<div>Data loading, please wait..
                         <Loader type="ThreeDots" color="#00BFFF" height={50} width={50} />
                         </div>
